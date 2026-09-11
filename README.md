@@ -1,8 +1,8 @@
 # Cortex AI Backend
 
-A backend project developed as part of the **Zyro Internship Program – Week 1**.
+Backend project developed as part of the **Zyro Internship Program – Week 2**.
 
-This project focuses on setting up the basic backend foundation using **Python, FastAPI, and PostgreSQL**.
+This week implements a basic **JWT-based authentication system** using Python, FastAPI, and PostgreSQL.
 
 ## Technologies Used
 
@@ -11,6 +11,8 @@ This project focuses on setting up the basic backend foundation using **Python, 
 - Uvicorn
 - PostgreSQL
 - Psycopg
+- bcrypt
+- PyJWT
 - python-dotenv
 - Git
 - GitHub
@@ -24,14 +26,18 @@ cortex-ai-backend/
 │   └── database.py
 │
 ├── controllers/
+│   └── auth_controller.py
 │
 ├── middleware/
+│   ├── auth_middleware.py
 │   ├── error_handler.py
 │   └── request_logger.py
 │
 ├── models/
+│   └── user.py
 │
 ├── routes/
+│   ├── auth.py
 │   └── health.py
 │
 ├── utils/

@@ -1,4 +1,5 @@
 import os
+
 import psycopg
 from dotenv import load_dotenv
 
@@ -13,9 +14,6 @@ def connect_to_database():
         user=os.getenv("DB_USER"),
         password=os.getenv("DB_PASSWORD"),
     )
-
-
-
 
 
 if __name__ == "__main__":
