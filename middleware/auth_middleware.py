@@ -1,12 +1,14 @@
 import os
 
 import jwt
+from dotenv import load_dotenv
 from fastapi import Request
 from fastapi.responses import JSONResponse
 
+load_dotenv()
+
 JWT_SECRET = os.getenv("JWT_SECRET")
 JWT_ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
-
 
 PUBLIC_PATHS = {
     "/api/health",
@@ -17,12 +19,22 @@ PUBLIC_PATHS = {
     "/redoc",
 }
 
+PROTECTED_PREFIXES = (
+    "/api/auth/",
+    "/api/documents",
+)
+
 
 async def auth_middleware(request: Request, call_next):
-    if request.url.path in PUBLIC_PATHS:
-        return await call_next(request)
+    path = request.url.path
 
-    if not request.url.path.startswith("/api/auth/"):
+    protected = (
+        path.startswith("/api/auth/")
+        or path.startswith("/api/documents")
+        or path == "/api/search"
+    )
+
+    if path in PUBLIC_PATHS or not protected:
         return await call_next(request)
 
     authorization = request.headers.get("Authorization")

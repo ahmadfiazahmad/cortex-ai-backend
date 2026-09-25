@@ -10,7 +10,6 @@ from models.user import UserCreate, UserLogin
 
 
 router = APIRouter(prefix="/api/auth")
-
 bearer_scheme = HTTPBearer()
 
 
@@ -30,5 +29,4 @@ def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme),
 ):
     user_id = request.state.user["user_id"]
-
     return get_user_by_id(user_id)
